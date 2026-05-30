@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Assinatura de E-mail</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 760px;
+        }
+
+        h2 {
+            color: #1a73e8;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 700;
+            color: #444;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.15);
+        }
+
+        .preview-box {
+            border: 2px dashed #cbd5e0;
+            padding: 16px;
+            margin: 18px 0;
+            border-radius: 8px;
+            background-color: #fff;
+            overflow-x: auto;
+        }
+
+        .btn-copy {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-copy:hover {
+            background-color: #1557b0;
+        }
+
+        .instruction {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        #outNome {
+            font-size: 17px !important;
+        }
+
+        #outCargo {
+            font-size: 14px !important;
+        }
+
+        #outTelefone {
+            font-size: 14px !important;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 18px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            input {
+                font-size: 13px;
+                padding: 9px 10px;
+            }
+
+            .btn-copy {
+                font-size: 14px;
+                padding: 11px;
+            }
+
+            #assinaturaFinal {
+                transform: scale(0.92);
+                transform-origin: left top;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Gerador de Assinatura</h2>
+
+    <div class="form-group">
+        <label for="inputNome">Nome Completo:</label>
+        <input type="text" id="inputNome" placeholder="Digite seu nome e sobrenome" maxlength="40">
+    </div>
+
+    <div class="form-group">
+        <label for="inputCargo">Área ou Cargo:</label>
+        <input type="text" id="inputCargo" placeholder="Digite sua Área ou Cargo">
+    </div>
+
+    <div class="form-group">
+        <label for="inputTelefone">Telefone / WhatsApp:</label>
+        <input type="text" id="inputTelefone" placeholder="(00) 00000-0000">
+    </div>
+
+    <p style="font-weight: bold; color: #444; margin-bottom: 5px;">
+        Pré-visualização:
+    </p>
+
+    <div class="preview-box" id="previewArea">
+
+        <table id="assinaturaFinal"
+               cellpadding="0"
+               cellspacing="0"
+               style="font-family: Arial, sans-serif; color: #333; line-height: 1.4;">
+
+            <tr>
+
+                <td style="padding-right: 20px; vertical-align: middle;">
+
+                    <span id="outNome"
+                          style="font-size: 16px; font-weight: bold; color: #1a73e8;">
+                        Nome do Usuário
+                    </span>
+                    <br>
+
+                    <span id="outCargo"
+                            style="font-size: 13px; color: #333; font-weight: bold;">
+                        Área ou Cargo
+                    </span>
+
+                    <br>
+
+                    <table cellpadding="0"
+                           cellspacing="0"
+                           style="margin-top: 10px;">
+
+                        <tr>
+                            <td style="font-size: 13px; color: #333;">
+
+                                <span id="outTelefone">(00) 00000-0000</span>
+                                <br>
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </td>
+
+                <td style="padding-left: 20px;
+                           vertical-align: middle;
+                           border-left: 2px solid #1a73e8;">
+
+                    <img src="https://dixinformatica.github.io/assinaturaemail/logo_dix_new4.png?text=LOGO"
+                         width="105"
+                         alt="Logo Empresa"
+                         style="display: block;">
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <button class="btn-copy" onclick="copiar()">
+        Copiar Assinatura para o E-mail
+    </button>
+
+    <p class="instruction">
+        Após clicar em copiar, vá nas configurações do seu e-mail e dê um "Colar" (Ctrl+V).
+    </p>
+
+</div>
+
+<script>
+
+    const inputNome = document.getElementById('inputNome');
+    const inputCargo = document.getElementById('inputCargo');
+    const inputTelefone = document.getElementById('inputTelefone');
+
+    const outNome = document.getElementById('outNome');
+    const outCargo = document.getElementById('outCargo');
+    const outTelefone = document.getElementById('outTelefone');
+
+    inputNome.addEventListener('input', function () {
+        outNome.innerText = this.value || "Nome do Usuário";
+    });
+
+    inputCargo.addEventListener('input', function () {
+        outCargo.innerText = this.value || "Área ou Cargo";
+    });
+
+    inputTelefone.addEventListener('input', function (e) {
+
+    let value = e.target.value.replace(/\D/g, '');
+
+    // Limita em 11 números
+    value = value.substring(0, 11);
+
+    // Formata telefone
+    if (value.length > 10) {
+
+        value = value.replace(
+            /^(\d{2})(\d{5})(\d{4}).*/,
+            '($1) $2-$3'
+        );
+
+    } else if (value.length > 6) {
+
+        value = value.replace(
+            /^(\d{2})(\d{4})(\d{0,4}).*/,
+            '($1) $2-$3'
+        );
+
+    } else if (value.length > 2) {
+
+        value = value.replace(
+            /^(\d{2})(\d{0,5})/,
+            '($1) $2'
+        );
+
+    } else {
+
+        value = value.replace(
+            /^(\d*)/,
+            '($1'
+        );
+    }
+
+    e.target.value = value;
+
+    outTelefone.innerText = value || "(00) 00000-0000";
+
+	});
+
+    function copiar() {
+
+        const area = document.getElementById('assinaturaFinal');
+
+        const range = document.createRange();
+        range.selectNode(area);
+
+        const selection = window.getSelection();
+
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        try {
+
+            const copiado = document.execCommand('copy');
+
+            if (copiado) {
+                alert('Assinatura copiada! Agora basta colar no Outlook, Gmail ou Webmail.');
+            }
+
+        } catch (err) {
+
+            alert('Erro ao copiar automaticamente. Copie manualmente.');
+
+        }
+
+        selection.removeAllRanges();
+    }
+
+</script>
+
+</body>
+</html>
